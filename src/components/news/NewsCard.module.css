@@ -1,0 +1,21 @@
+.card{
+  border:1px solid #eee;
+  border-radius:8px;
+  overflow:hidden;
+  transition:0.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+}
+
+.image{
+  width:100%;
+  height:auto;
+}
+
+.title,.time{
+  font-size:18px;
+  padding:12px;
+}
