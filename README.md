@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Headless WordPress Blog
 
-## Getting Started
+Next.js と Headless WordPress を使用したブログサイトです。
+WordPress を CMS として使用し、Next.js でフロントエンドを構築しています。
 
-First, run the development server:
+## 🚀 Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Coming soon
+
+## 🛠 Tech Stack
+
+* Next.js (App Router)
+* TypeScript
+* Headless WordPress (REST API)
+* CSS / Global CSS
+* Git / GitHub
+
+## 📂 Project Structure
+
+```
+src
+ ├ app
+ │   ├ news
+ │   │   ├ page.tsx
+ │   │   └ [slug]
+ │   │       └ page.tsx
+ │   ├ layout.tsx
+ │   └ page.tsx
+ ├ components
+ │   ├ NewsCard.tsx
+ │   ├ Pagination.tsx
+ │   └ Breadcrumb.tsx
+ ├ lib
+ │   └ wordpress.ts
+ ├ utils
+ │   └ addHeadingId.ts
+ ├ hooks
+ └ types
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* WordPress REST API から記事取得
+* 記事一覧ページ
+* 記事詳細ページ
+* ページネーション
+* パンくずリスト
+* 目次（TOC）
+* JSON-LD（構造化データ）
+* sitemap 対応
+* SEO対策
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔍 Example Code
 
-## Learn More
+### WordPress API Fetch
 
-To learn more about Next.js, take a look at the following resources:
+```ts
+export async function getNews() {
+  const res = await fetch(`${process.env.WP_API_URL}/wp-json/wp/v2/posts`)
+  return res.json()
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Heading ID Utility
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```ts
+export function addHeadingId(html: string) {
+  return html.replace(/<h([2-3])>(.*?)<\/h[2-3]>/g, (_, level, text) => {
+    const id = text
+      .replace(/<[^>]+>/g, "")
+      .toLowerCase()
+      .replace(/\s+/g, "-")
 
-## Deploy on Vercel
+    return `<h${level} id="${id}">${text}</h${level}>`
+  })
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧠 What I Learned
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Headless CMS 構成
+* Next.js App Router
+* APIデータ取得
+* SEO対応
+* TypeScriptでの型管理
+* コンポーネント設計
+
+## 📌 Future Improvements
+
+* Search機能
+* 人気記事表示
+* ダークモード
+* ISR対応
+* パフォーマンス最適化
+
+## 👨‍💻 Author
+
+Yuya Matsura
